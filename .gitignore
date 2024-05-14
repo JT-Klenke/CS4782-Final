@@ -1,0 +1,7 @@
+plots/
+generated/
+self*
+best*
+ens*
+cifar*
+__pycache__
