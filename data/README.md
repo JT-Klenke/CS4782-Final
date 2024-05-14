@@ -1,0 +1,1 @@
+To download the data, follow the instructions on the [CIFAR website](https://www.cs.toronto.edu/~kriz/cifar.html) to download the python version of CIFAR-10. To create the synthetic data, run `generate_synthetic.py`
