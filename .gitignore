@@ -2,6 +2,6 @@ plots/
 generated/
 self*
 best*
-ens*
+ens*/
 cifar*
 __pycache__

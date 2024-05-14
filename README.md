@@ -40,6 +40,22 @@ In order to run the code, you must first generate the synthetic data by running 
 The code is relatively lightweight and any GPU should be able to run the code. While it does take a while the memory requirements are low, only around 4GB of VRAM required to run on the GPU. While it is probably possible to run on the CPU, it will take a very long time as the code trains many ResNet models.
 
 ## Results and Analysis
+For the first graph, I got something partially different from the paper's results. While I saw that the test agreement did improve as the number of examples went up, I also saw that the generality of the model steadily increased as well. In contrast, the paper saw that test accuracy went down with the number of extra examples. I hypothesize this is because of the simplicity of CIFAR-10, because it is an easier dataset I suspect that it is easier for a model to learn directly because its generally not that hard to get a good accuracy. The main advantage of the teacher is in smoothing out the labels and giving the student a better idea of what data is "hard" and softening it. I suspect that because CIFAR-10 is easer to learn than CIFAR-100 that learning purely through the teacher is actually harder because it masks the underlying learning goal with something a bit more challenging. As there is more data then the student is more fully able to match the teacher and thus perform better on the test set.
+
+In the graph of the ensemble I got very similar results to the paper with both trending upwards. The biggest difference is in the numbers themselves which comes from using a different dataset. Another difference is that in my re-implementation is that across both graphs the values seem to trend upwards more than in the original paper. Again, I believe this is caused by the use of CIFAR-10 which is an easier dataset. This means that having more examples is more beneficial because the original dataset doesn't cover a very large domain (only 10 classes) and so adding synthetic data actually helps for the student model to learn better.
+
+Within the boader context of the paper it is interesting that the results seem to depend on the dataset. It would be interesting to see in what domains does knowledge distillation behave like the paper and in what domains does it behave in the way that I found. My hypothesis is that it is determined by the complexity of the dataset (since that is the only thing different between our implementations) but it would be interesting to see a further investigation.
+
+![Graph 1](results/from_reimplementation/graph.png)
+![Graph 2](results/from_reimplementation/ens-graph.png)
+
+
+In these two graphs my re-implementation and the original paper's results match almost perfectly, the only difference is that the student doesn't out perform the teacher at the lower ensembles levels (which is explained in the previous section). Additionally, the numbers are different which obviously results from using a different dataset. Another slight difference is that the model doesn't seem to saturate as quickly, ie that having larger ensembles continues to see large improvements in the student model even though the teacher stops getting better results on the dataset. I believe this is for similar reasons as the previous section which is that because the dataset is simpler having a better teacher more faithfully represents the underlying data and thus is more like directly learning from the dataset which in this case is actually easier because the dataset is relatively simple. 
+
+![Graph 3](results/from_reimplementation/ens.png)
+![Graph 4](results/from_reimplementation/ens-agg.png)
+
+
 
 ## Conclusion and Future Work
 
